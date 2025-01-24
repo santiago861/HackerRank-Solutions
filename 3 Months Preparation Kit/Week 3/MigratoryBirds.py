@@ -20,7 +20,15 @@ def migratoryBirds(arr):
             birds[elem] = 1
         else:
             birds[elem] += 1
-    return max(birds.values())
+
+    max_value = max(birds.values())
+    max_elems = []
+    for bird in birds:
+        if birds[bird] == max_value: # birds[bird] returns the value of the element & bird returns the key of the element
+            max_elems.append(bird)
+    return min(max_elems)
+
+
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
