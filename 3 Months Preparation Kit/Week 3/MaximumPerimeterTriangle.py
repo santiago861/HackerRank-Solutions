@@ -18,29 +18,13 @@ def maximumPerimeterTriangle(sticks):
 
     # A non-degenerate triangle is one where the sum of the lengths of any two sides is greater than the length of the remaining side.
     # we need to discard the triangles which the sum between 2 of its sides is less or equal to the third side
-    sticksInOrder = sorted(sticks)
-    triangles = []
-    for i in range(0, len(sticksInOrder) - 2):
-        if sticksInOrder[i] + sticksInOrder[i + 1] > sticksInOrder[i + 2]:
-            triangles.append([sticksInOrder[i], sticksInOrder[i + 1], sticksInOrder[i + 2]])
+    sticks.sort(reverse=True)
+    # reversing the sorted array ensures to prioritize the longest posible sides, this way we find the triangle with the greates perimeter
 
-    max_sides = []
-    min_sides = []
-    
-    if len(triangles) == 0:
-        return [-1]
-    elif len(triangles) > 1:
-        for triangle in triangles:
-            max_sides.append(max(triangle))
-            min_sides.append(min(triangle))
-        if max_sides.count(max(max_sides)) == 1:
-            return triangles[max_sides.index(max(max_sides))]
-        elif max_sides.count(max(max_sides)) > 1:
-            return triangles[min_sides.index(max(min_sides))]
-        else:
-            return triangles[0]
-    else:
-        return triangles[0]
+    for i in range(0, len(sticks) - 2):
+        if sticks[i] < sticks[i + 1] + sticks[i + 2]:
+            return [sticks[i + 2], sticks[i + 1], sticks[i]]
+    return [-1]
 
 
 if __name__ == '__main__':
